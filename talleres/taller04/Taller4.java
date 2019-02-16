@@ -55,12 +55,53 @@ public class Taller4 {
             return costoCaminoAux;
         }
     }
+    
+    public static int hamiltonCostMinCamino(Digraph g, int o){
+        //declaración de variables 
+        int[] cost = new int[1];
+        int vert = 0;
+        boolean[] visit =new boolean[g.size()];
+        int size = 0;
+        cost[0] = 99999;   
+        hamiltonCostMinAux(g, o, o, visit, cost, size, vert);
+        return cost[0] == Integer.MAX_VALUE ? 0 : cost[o];
+        
+    }
+    
+    public static boolean hamiltonCostMinAux(Digraph g, int o, int d, boolean[] visitados,int[] peso, int size
+            , int vert){
+        
+        ArrayList<Integer> hijazos = g.getSuccessors(o);
+  
+        //Condición de parada si el origen es igual al destino y hemos recorrido todos los vértices
+        if(o == d && g.size() == vert){
+            if(size < peso[0]){
+                peso[0]=size;
+            }
+            visitados[o] = false;
+            return true;
+        }               
+         vert=vert+1;     
+         visitados[o]=true;
+         // ciclo recorriendo los hijos
+        for (Integer hijito:hijazos) {
+            if(( !visitados[hijito]    &&    size+g.getWeight(o, hijito)<peso[0])    ||    (hijito == d     &&    vert == g.size())){
+                size += g.getWeight(o,    hijito);
+                //nuevo llamado recursivo, esta vez tomando como origen el hijo
+                hamiltonCostMinAux(g,  hijito,  d, visitados,    peso,   size,    vert);
+                
+                
+            }
+            
+        }
+        visitados[o]=false;
+        return false;
+        
+    }
 
 
 
-    /**
-     * @param args the command line arguments
-     */
+
     public static void main(String[] args) {
         DigraphAL grafito = new DigraphAL(8);
         grafito.addArc(0, 1, 2);
@@ -75,9 +116,7 @@ public class Taller4 {
         grafito.addArc(5,6,20);
         grafito.addArc(6, 7, 2);
         System.out.println(costoMinimo(grafito,0,7));
+        hamiltonCostMinCamino(grafito, 1);
     }
     
 }
-
-
-
