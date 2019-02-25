@@ -119,7 +119,7 @@ public class Lector {
                 
         boolean nuevoComienzo = false;
         
-        boolean aux = false;
+
         
         while (entries.hasNext()) { 
 
