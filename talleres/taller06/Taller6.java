@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package taller4;
-
-import java.util.ArrayList;
-
-/**
+public class Taller6 {
+    /**
  *
- * @author cl18417
+ * @author Jhonatan Acevedo Castrillón, Manuel Gutierrez Mejía
  */
-public class Taller4 {
+
    public static int caminoGreedy(Digraph grafito, int o){
        boolean []visitados = new boolean[grafito.size()];
        return caminoGreedyAux(grafito,o,visitados,0,o);
@@ -20,17 +17,18 @@ public class Taller4 {
       int menorAux = Integer.MAX_VALUE;
       int menorGrafoAux=-1;
       visitados[o] = true;
-      if(tamGrafo == visitados.length-1 && o == d){
+      if(tamGrafo == visitados.length && o == d){
           return 0;
       }
       else{
           for(int grafo: grafito.getSuccessors(o)){
               
-              if(grafito.getWeight(o, grafo) < menorAux && visitados[grafo]==false ||
-                      ){
+              if((grafito.getWeight(o, grafo) <= menorAux && visitados[grafo]==false) || 
+                  grafo == d && tamGrafo == grafito.size()-1){
+                  
                   menorAux = grafito.getWeight(o, grafo);
-                  menorGrafoAux = grafo;   
-                  System.out.println(o+"   holi   "+grafo + "hola   " +d);
+                  menorGrafoAux = grafo;  
+                  
               }            
           }
           return menorAux + caminoGreedyAux(grafito,menorGrafoAux,visitados,tamGrafo+1,d);
@@ -76,5 +74,4 @@ public class Taller4 {
                 }
 	}      
     }
-    
 
