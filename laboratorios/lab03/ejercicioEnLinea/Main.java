@@ -14,8 +14,7 @@ public class Main {
         int vertices = teclado.nextInt();
         int arcos = teclado.nextInt();
         DigraphAL grafito = new DigraphAL(vertices); //Creamos el grafo 
-        for (int i = 0; i
-                < arcos; i++) {
+        for (int i = 0; i < arcos; i++) {
             int origen = teclado.nextInt();
             int destino = teclado.nextInt();
             int peso = teclado.nextInt();
